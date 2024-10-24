@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Wiz - Blog - 11</title>
+    <link rel="icon" href="../img/logo.png" type="image/png" />
+    <link rel="stylesheet" href="../Css/blog.css" />
+    <script src="../Js/script.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav-logo">
+        <a href="/index.html"><img src="../img/Logo.png" alt="Word Wiz Logo" /></a>
+      </div>
+      <div class="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../pages/about.html">About</a></li>
+        <li><a href="../pages/services.html">Services</a></li>
+        <li><a href="../pages/blog.html" class="active">Blog</a></li>
+        <li><a href="../pages/contact.html">Contact Us</a></li>
+        <a href="../pages/explore.html" class="explore-btn">Explore</a>
+      </ul>
+    </header>
+
+    <section class="blog-header">
+      <div class="header-text">
+        <h2>
+          Spell Smarter, Not Harder with WordWiz - The Ultimate Spelling
+          Solution
+        </h2>
+        <p>
+          Have you ever thought spelling is hard? It doesn’t have to be if you
+          have the right tool.
+        </p>
+        <h4>WORDWIZ TEAM 8/10/2024</h4>
+      </div>
+      <div class="header-image">
+        <img src="../img/blog11-img.png" alt="Blog Image" />
+      </div>
+    </section>
+
+    <section class="blog-text">
+      <h2>
+        Spell Smarter, Not Harder with WordWiz - The Ultimate Spelling Solution
+      </h2>
+      <p>
+        Have you ever thought spelling is hard? It doesn’t have to be if you
+        have the right tool.
+      </p>
+      <p>Spelling should be simple because:</p>
+      <ol>
+        <li>
+          <strong>1. Effective Communication:</strong><br />Simple spelling
+          ensures clarity and avoids misunderstandings, making communication
+          more effective.
+        </li>
+        <li>
+          <strong>2. Learning Efficiency:</strong><br />Simplified spelling
+          reduces the cognitive load, helping learners focus on other aspects of
+          language, such as vocabulary and grammar.
+        </li>
+        <li>
+          <strong>3. Increased Confidence:</strong><br />Easier spelling
+          encourages learners to engage more frequently, building confidence and
+          fluency.
+        </li>
+        <li>
+          <strong>4. Accessibility:</strong><br />Simple spelling makes reading
+          and writing more accessible to individuals of all skill levels,
+          including those with learning difficulties.
+        </li>
+        <li>
+          <strong>5. Reduced Errors:</strong><br />Simplified spelling reduces
+          the likelihood of mistakes, making written communication more accurate
+          and reliable.
+        </li>
+        <li>
+          <strong>6. Faster Learning:</strong><br />With fewer rules and
+          exceptions, learners can acquire spelling skills more quickly and
+          efficiently.
+        </li>
+      </ol>
+      <p>
+        Overall, simplifying spelling contributes to smoother learning processes
+        and better communication skills.
+      </p>
+    </section>
+
+    <footer>
+      <div class="footer">
+        <div class="footer-left">
+          <img src="../img/logo_white.png" alt="Word Wiz Logo" />
+          <h2>
+            We are committed to improving your spelling skills and overall
+            knowledge.
+          </h2>
+          <hr />
+          <div class="social-media">
+            <h2>Follow us on</h2>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fa-regular fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="center-1">
+          <div>
+            <h1>Quick Links</h1>
+            <ul>
+              <li><a href="../pages/about.html">About Us</a></li>
+              <li><a href="../pages/services.html">Services</a></li>
+              <li><a href="../pages/blog.html">Blog</a></li>
+              <li><a href="../pages/contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="center-2">
+          <div>
+            <h1>Privacy & Policy</h1>
+            <ul>
+              <li><a href="../privacy-pages/privacy.html">Privacy Policy</a></li>
+              <li><a href="../privacy-pages/terms.html">Terms of Use</a></li>
+              <li><a href="../privacy-pages/security.html">Security</a></li>
+              <li><a href="../privacy-pages/copyright.html">Copyright Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-end">
+          <div class="lang">
+            <h1>Choose Your Language</h1>
+            <div class="language-select">
+              <select name="language" id="language">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+              </select>
+              <button class="change-language">Apply</button>
+            </div>
+          </div>
+          <div class="icons">
+            <a href="#left" class="cards">
+              <img src="../img/apple.png" alt="" />
+              <h3>Download on the<br /><span>App Store</span></h3>
+            </a>
+            <a href="#right" class="cards">
+              <img src="../img/android.png" alt="" />
+              <h3>Get it on<br /><span>Google Play</span></h3>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p><span>&#169;</span> 2024 WordWiz. All Right Reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+
+        hamburger.addEventListener("click", () => {
+          hamburger.classList.toggle("active");
+          navLinks.classList.toggle("active");
+        });
+      });
+    </script>
+  </body>
+</html>

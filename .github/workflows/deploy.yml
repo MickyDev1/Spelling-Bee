@@ -1,0 +1,76 @@
+name: Deploy to ECR cluster
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to ECR
+        # You may pin to the exact commit or the version.
+        # uses: jwalton/gh-ecr-login@8f09f5bf7451d6b8e3f458240eb4026f9476a18d
+        uses: jwalton/gh-ecr-login@v3.0.1
+        with:
+          # Access key for IAM User.
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          # Secret access key for IAM User.
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          # AWS Region to use.
+          region: eu-west-1
+
+        env:
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Set environment variables
+        run: |
+          echo "ECR_REGISTRY=${{ secrets.ECR_REGISTRY }}" >> $GITHUB_ENV
+          echo "AWS_ECR_REPO_NAME=${{ secrets.REPO_NAME }}" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+        
+      - name: Docker Build Tag Publish to ECR
+        uses: bitovi/github-actions-docker-ecr-publish@v0.1.0
+        with: 
+          aws_login: true
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ECR_REPO_NAME: ${{ secrets.REPO_NAME }}
+          IMAGE_TAG: ${{ github.sha }} 
+        
+        env:
+          ECR_REGISTRY: ${{ env.ECR_REGISTRY }}
+          AWS_ECR_REPO_NAME: ${{ env.REPO_NAME }}
+          IMAGE_TAG: ${{ env.IMAGE_TAG }} # Dynamically generated image tag 
+          
+      - name: Install kubectl
+        run: |
+          curl -o kubectl https://amazon-eks.s3.eu-west-1.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
+          chmod +x ./kubectl
+          mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+          echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.CLUSTER_NAME }}
+
+      - name: Deploy to EKS
+        run: |
+         envsubst < terraform/k8s/deployment.yaml > terraform/k8s/deployment-subst.yaml
+         cat terraform/k8s/deployment-subst.yaml
+         kubectl apply -f terraform/k8s/deployment-subst.yaml
+         kubectl apply -f terraform/k8s/service.yaml
+         kubectl apply -f terraform/k8s/ingress.yaml
