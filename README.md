@@ -105,3 +105,6 @@ This example uses mock data; in a production environment, you would replace this
 This FastAPI application provides basic functionality for changing passwords securely while ensuring that users authenticate themselves through an OTP process. 
 
 ![Word-wiz Application System Design Architecture drawio](https://github.com/user-attachments/assets/5fa1de81-5702-4b17-b87a-038a5c57302c)
+
+
+Word Wiz
