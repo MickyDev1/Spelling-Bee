@@ -107,4 +107,4 @@ This FastAPI application provides basic functionality for changing passwords sec
 ![Word-wiz Application System Design Architecture drawio](https://github.com/user-attachments/assets/5fa1de81-5702-4b17-b87a-038a5c57302c)
 
 
-Word Wiz
+Word Wiz!!!!!!!!
